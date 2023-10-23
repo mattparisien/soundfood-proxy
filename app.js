@@ -32,4 +32,4 @@ app.get("/episodes/:id", async (req, res) => {
   res.json(episode);
 });
 
-app.listen(PORT, () => console.log("Server running"));
+app.listen(PORT, () => console.log("Server running!"));
