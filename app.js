@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 require("dotenv").config();
 
@@ -27,7 +27,10 @@ app.get("/episodes/:id", async (req, res) => {
   const url = process.env.APPLE_PODCASTS_ENDPOINT;
   const { data } = await axios.get(url);
 
-  const episode = data.results.reverse()[episodeId == -1 ? 0 : episodeId];
+  const episode =
+    data.results.reverse()[
+      episodeId == -1 ? data.results.length - 2 : episodeId
+    ];
 
   res.json(episode);
 });
