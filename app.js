@@ -27,7 +27,10 @@ app.get("/episodes/:id", async (req, res) => {
   const url = process.env.APPLE_PODCASTS_ENDPOINT;
   const { data } = await axios.get(url);
 
-  const episode = data.results.reverse()[episodeId + 1];
+  const episode =
+    data.results.reverse()[
+      episodeId == -1 ? data.results.length - 1 : episodeId
+    ];
 
   res.json(episode);
 });
