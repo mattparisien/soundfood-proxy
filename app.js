@@ -27,12 +27,12 @@ app.get("/episodes/:id", async (req, res) => {
   const url = process.env.APPLE_PODCASTS_ENDPOINT;
   const { data } = await axios.get(url);
 
-  const episode =
-    data.results.reverse()[
-      episodeId == -1 ? data.results.length - 2 : episodeId
-    ];
+  const episodeNumber = episodeId == -1 ? data.results.length - 2 : episodeId;
 
-  res.json(episode);
+  const episode =
+    data.results.reverse()[episodeNumber];
+
+  res.json({...episode, episodeNumber });
 });
 
 app.listen(PORT, () => console.log("Server running!"));
