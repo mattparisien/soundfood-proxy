@@ -32,6 +32,11 @@ app.get("/episodes/:id", async (req, res) => {
   const episode = data.results.reverse()[episodeNumber];
 
   res.json({ ...episode, episodeNumber: episodeNumber || 1 });
+
+  console.log({
+    ...episode,
+    episodeNumber: episodeNumber || 1,
+  });
 });
 
 app.listen(PORT, () => console.log("Server running!"));
