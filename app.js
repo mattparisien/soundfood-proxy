@@ -23,11 +23,11 @@ app.get("/episodes", async (req, res) => {
 });
 
 app.get("/episodes/:id", async (req, res) => {
-  const episodeId = parseInt(req.params.id);
+  const episodeId = req.params.id !== "current" ? parseInt(req.params.id) : null;
   const url = process.env.APPLE_PODCASTS_ENDPOINT;
   const { data } = await axios.get(url);
 
-  const episodeNumber = episodeId == -1 ? data.results.length - 2 : episodeId;
+  const episodeNumber = episodeId == "current" ? data.results.length - 2 : episodeId;
 
   const episode = data.results.reverse()[episodeNumber];
 
